@@ -4,9 +4,68 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ThatsOnVoice"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="500" Width="700">
     <Grid>
+        <!-- 列定義（横に何個並ぶか） -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
 
+        <!-- 行定義（縦に何個並ぶか） -->
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button
+                    Click="Button_Click"
+                    Width="100"
+                    Content="雑音を選択"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    Style="{StaticResource MaterialDesignRaisedButton}"
+                    ToolTip="Resource name: MaterialDesignRaisedButton"
+                />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <materialDesign:PackIcon Kind="VolumeHigh" VerticalAlignment="Center" Margin="5" />
+                <Slider Maximum="100" Minimum="0" Value="35" Width="200" VerticalAlignment="Center" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <materialDesign:PackIcon Kind="Microphone" VerticalAlignment="Center" Margin="5"  />
+                <ProgressBar
+                    materialDesign:TransitionAssist.DisableTransitions="True"
+                    Value="{Binding volume_value}"
+                    Height="2"
+                    Width="200"
+                />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <ComboBox materialDesign:HintAssist.Hint="マイク入力">
+                    <ComboBoxItem Content="未選択" />
+                    <ComboBoxItem Content="マイクA" />
+                    <ComboBoxItem Content="マイクB" />
+                    <ComboBoxItem Content="マイクC" />
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <ComboBox materialDesign:HintAssist.Hint="音声出力">
+                    <ComboBoxItem Content="未選択" />
+                    <ComboBoxItem Content="出力A" />
+                    <ComboBoxItem Content="出力B" />
+                    <ComboBoxItem Content="出力C" />
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <ToggleButton
+                    IsChecked="False"
+                    Style="{StaticResource MaterialDesignSwitchSecondaryToggleButton}"
+                    ToolTip="MaterialDesignSwitchSecondaryToggleButton" Checked="ToggleButton_Checked" Content=""
+                />
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>
+
